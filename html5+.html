@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Demo</title>
+    <meta charset="utf-8">
+    <style>
+
+    @import url('https://fonts.googleapis.com/css?family=Work+Sans:300&subset=latin-ext');
+
+      html, body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      body {
+        background-image: url("hatter.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        color: white;
+        display: flex;
+        flex-direction: column;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+        margin: 0 10px;
+      }
+
+      .pirosvonal {
+        border: 1px solid red;
+      }
+
+      .nagybetu {
+        font-family: 'Work sans';
+        font-size: 40px;
+        flex-grow: 1;
+      }
+
+      .kontener {
+
+      }
+
+      .kozepre {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .tarolo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .fejlecbetu {
+        font-family: Arial;
+        font-size: 16px;
+      }
+
+      .gombocska {
+        padding: 10px;
+        width: 160px;
+        font-family: Arial;
+        font-size: 16px;
+        text-align: center;
+        background-color: rgba(0, 0, 0, .7);
+        display: inline-block;
+      }
+
+      .gombdoboz {
+        display: flex;
+        flex-direction: row;
+      }
+
+      video {
+        position: absolute;
+        z-index: -100;
+        top: 50%;
+        left: 50%;
+        width: auto;
+        height: auto;
+        min-width: 100%;
+        min-height: 100%;
+        transform: translate(-50%, -50%);
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <video autoplay loop muted poster="hatter.jpg" src="video.mp4">
+    </video>
+
+    <div class="kozepre fejlecbetu">
+      <a href="http://www.disney.com">Disney</a>
+      <a href="http://www.netacademia.com">Netakadémia</a>
+      <a href="masikfajl.html">Magunkról</a>
+    </div>
+
+    <div class="tarolo nagybetu">
+
+      <div class="gombdoboz">
+
+        <a href="http://www.disney.com">
+          <div class="gombocska">
+            Disney
+          </div>
+        </a>
+
+        <a href="http://www.netacademia.com">
+          <div class="gombocska">
+          Netakadémia
+          </div>
+        </a>
+
+        <a href="masikfajl.html">
+          <div class="gombocska">
+            Magunkról
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="kozepre fejlecbetu">Láblec lesz belőle</div>
+
+  </body>
+</html>
