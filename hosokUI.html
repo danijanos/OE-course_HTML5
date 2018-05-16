@@ -3,7 +3,7 @@
 
 <head>
   <!-- Required meta tags -->
-  <title>Heroes</title>
+  <title>Hero Manager</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -12,8 +12,6 @@
 
   <!-- Optional JavaScript -->
   <script src="x-tag-raw.min.js"></script>
-  <!-- <script src="heroselector.js"></script> -->
-  <script src="home.js"></script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -48,7 +46,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-    <a class="navbar-brand" onclick="loadTemplate('main','#home')" href="#">Home</a>
+    <a class="navbar-brand" onclick="loadTemplate()" href="#">Home</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -58,7 +56,7 @@
 
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" onclick="loadTemplate('heroselector','#home')" href="#">Heroselector<span class="sr-only">(current)</span></a>
+          <a class="nav-link" onclick="loadTemplate('heroselector')" href="#">Heroselector<span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item">
@@ -132,27 +130,55 @@
 
   </div>
 
-  <template id="home">
-    <x-home></x-home>
-  </template>
+  <x-manager></x-manager>
 
-<!--
+  <!--
   <template id="heroselector">
     <x-heroselector></x-heroselector>
   </template>
 -->
 
   <script>
+    const url = "http://81.2.241.234:8080/hero/";
+
+    const Manager = xtag.create('x-manager', class extends XTagElement {
+
+      name() {
+        return 'Manager';
+      }
+
+      'main::template(true)' () {
+        return `<h2>I am the ${this.name()}</h2>
+              <span>I was created by x-tag</span>`
+      }
+
+      'heroselector::template' () {
+        console.log(".........");
+        return `heroselector yeah!`
+      }
+    });
+
+    const ManagerNode = new Manager();
+
     function GetHero() {
       var heroID = document.getElementById('hero_id').value;
-      var url = "http://81.2.241.234:8080/hero/" + heroID;
+      var resource = url + heroID;
 
       var oReq = new XMLHttpRequest();
 
       oReq.addEventListener("load", reqListener);
-      oReq.open("GET", url, true);
+      oReq.open("GET", resource, true);
 
       oReq.send();
+    }
+
+    function AddHero() {
+      var NewHeroName = document.getElementById('hero_name').value;
+      var NewHeroDescription = document.getElementById('hero_description').value;
+
+      xhttp.open("POST", url, true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("name=NewHeroName&desc=NewHeroDescription");
     }
 
     function reqListener() {
@@ -162,18 +188,18 @@
       document.getElementById("hero_description").innerHTML = hero.description;
     }
 
-    function loadTemplate(xTagTemplate, pTemplateID) {
+    function loadTemplate() {
 
-      const HomeNode = new Home();
-      HomeNode.render('heroselector');
-
-      // HomeNode.render(xTagTemplate);
-
+      console.log("valami");
+      ManagerNode.render('heroselector');
+      console.log("valami:"+JSON.stringify(ManagerNode));
+      /*
       var temp = document.querySelector(pTemplateID);
       var clone = document.importNode(temp.content, true);
       var dest = document.querySelector("#main-content");
       dest.innerHTML = "";
       dest.appendChild(clone);
+      */
     }
   </script>
 
